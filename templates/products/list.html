@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Shop - ShirtVerse{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Shop All Shirts</h2>
+
+    <div class="d-flex flex-wrap align-items-center mb-3">
+        <p class="mb-0 me-3 text-muted">{{ results_count }} styles match your filters.</p>
+        {% if applied_filters %}
+            <div class="d-flex flex-wrap gap-2">
+                {% for fltr in applied_filters %}
+                    <span class="badge rounded-pill bg-light text-dark border">
+                        <strong class="me-1">{{ fltr.label }}:</strong> {{ fltr.value }}
+                    </span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="row">
+        <!-- Sidebar Filters -->
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Filters</h5>
+                </div>
+                <div class="card-body">
+                    <form method="get" class="filter-form">
+                        <div class="mb-3">
+                            <label for="search" class="form-label">Search</label>
+                            <div class="position-relative">
+                                <input type="text" class="form-control" id="search" name="search" placeholder="Search products..." value="{{ search_query }}" autocomplete="off" data-suggestions-url="{% url 'products:suggestions' %}">
+                                <div id="search-suggestions" class="list-group position-absolute w-100 shadow-sm d-none"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select" id="category" name="category">
+                                <option value="">All Categories</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.slug }}" {% if selected_category == category.slug %}selected{% endif %}>{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <label for="size" class="form-label">Size</label>
+                                <select class="form-select" id="size" name="size">
+                                    <option value="">Any</option>
+                                    {% for option in size_options %}
+                                        <option value="{{ option.slug }}" {% if selected_size == option.slug %}selected{% endif %}>{{ option.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="color" class="form-label">Color</label>
+                                <select class="form-select" id="color" name="color">
+                                    <option value="">Any</option>
+                                    {% for option in color_options %}
+                                        <option value="{{ option.slug }}" {% if selected_color == option.slug %}selected{% endif %}>{{ option.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4">Price Range</h6>
+                        <div class="mb-3">
+                            <input type="number" class="form-control mb-2" name="min_price" placeholder="Min Price" value="{{ min_price }}">
+                            <input type="number" class="form-control" name="max_price" placeholder="Max Price" value="{{ max_price }}">
+                        </div>
+
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" role="switch" id="inStock" name="in_stock" {% if in_stock_only %}checked{% endif %}>
+                            <label class="form-check-label" for="inStock">In-stock items only</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                        <a href="{% url 'products:list' %}" class="btn btn-outline-secondary w-100 mt-2">Reset</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Products Grid -->
+        <div class="col-md-9">
+            <div class="row g-4">
+                {% for product in products %}
+                <div class="col-md-4">
+                    <div class="card product-card h-100">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+                        {% else %}
+                            <div class="card-img-top product-image bg-secondary d-flex align-items-center justify-content-center">
+                                <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text text-muted">{{ product.category.name }}</p>
+                            <p class="card-text">
+                                <strong class="text-primary">₹{{ product.price }}</strong>
+                            </p>
+                            {% if product.is_in_stock %}
+                                <span class="badge bg-success">In Stock</span>
+                            {% else %}
+                                <span class="badge bg-danger">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer bg-white">
+                            <a href="{% url 'products:detail' product.slug %}" class="btn btn-primary w-100">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <p class="mb-0">No products found matching your criteria.</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

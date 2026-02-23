@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Confirmation - ShirtVerse{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body text-center p-5">
+                    <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
+                    <h2 class="mt-3">Order Placed Successfully!</h2>
+                    <p class="lead">Thank you for your order.</p>
+                    
+                    <div class="alert alert-success mt-4">
+                        <h4>Order Number: <strong>{{ order.order_number }}</strong></h4>
+                        <p class="mb-0">We've received your order and will process it shortly.</p>
+                    </div>
+                    
+                    <div class="card mt-4 text-start">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Order Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-sm-4"><strong>Order Date:</strong></div>
+                                <div class="col-sm-8">{{ order.placed_at|date:"F d, Y" }}</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-4"><strong>Status:</strong></div>
+                                <div class="col-sm-8">
+                                    <span class="badge bg-warning">{{ order.get_status_display }}</span>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-4"><strong>Total Amount:</strong></div>
+                                <div class="col-sm-8">
+                                    <strong class="text-primary">₹{{ order.total_amount }}</strong>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-4"><strong>Payment Method:</strong></div>
+                                <div class="col-sm-8">Cash on Delivery (COD)</div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <h6>Delivery Address:</h6>
+                            <p class="mb-0">
+                                {{ order.address.full_name }}<br>
+                                {{ order.address.address_line1 }}<br>
+                                {% if order.address.address_line2 %}
+                                    {{ order.address.address_line2 }}<br>
+                                {% endif %}
+                                {{ order.address.city }}, {{ order.address.state }} - {{ order.address.postal_code }}<br>
+                                {{ order.address.country }}<br>
+                                Phone: {{ order.address.phone }}
+                            </p>
+                            
+                            <hr>
+                            
+                            <h6>Order Items:</h6>
+                            {% for item in order.items.all %}
+                            <div class="d-flex justify-content-between mb-2">
+                                <div>
+                                    {{ item.product_name }}
+                                    {% if item.size_label or item.color_label %}
+                                        (
+                                        {% if item.size_label %}{{ item.size_label }}{% endif %}
+                                        {% if item.size_label and item.color_label %}, {% endif %}
+                                        {% if item.color_label %}{{ item.color_label }}{% endif %}
+                                        )
+                                    {% endif %}
+                                    x {{ item.quantity }}
+                                </div>
+                                <div>₹{{ item.total }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'profiles:orders' %}" class="btn btn-primary me-2">
+                            <i class="bi bi-list-ul"></i> View All Orders
+                        </a>
+                        <a href="{% url 'home' %}" class="btn btn-outline-primary">
+                            <i class="bi bi-house"></i> Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

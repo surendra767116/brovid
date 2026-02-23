@@ -1,0 +1,638 @@
+/* ShirtVerse Custom Styles */
+
+/* ========================================
+   1. CSS Variables (Theme Colors)
+   ======================================== */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --info-color: #3498db;
+    --light-gray: #ecf0f1;
+    --dark-gray: #7f8c8d;
+    --white: #ffffff;
+    --black: #2c3e50;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,.1);
+    --shadow-md: 0 4px 8px rgba(0,0,0,.2);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,.3);
+    --transition-speed: 0.3s;
+}
+
+/* ========================================
+   2. Base Styles
+   ======================================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 70px;
+    color: var(--black);
+    line-height: 1.6;
+    background-color: #f8f9fa;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   3. Navigation Bar
+   ======================================== */
+.navbar {
+    background-color: var(--primary-color) !important;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-speed) ease;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white !important;
+    transition: transform var(--transition-speed) ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    transition: color var(--transition-speed) ease;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ========================================
+   4. Buttons
+   ======================================== */
+.btn {
+    transition: all var(--transition-speed) ease;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-danger {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.btn-success:hover {
+    background-color: #229954;
+    border-color: #229954;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   5. Cards
+   ======================================== */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-speed) ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card-header {
+    font-weight: 600;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+/* ========================================
+   6. Product Cards
+   ======================================== */
+.product-card {
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    border: none;
+    box-shadow: var(--shadow-sm);
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product-image {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+    transition: transform var(--transition-speed) ease;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.1);
+}
+
+.product-card .card-body {
+    padding: 1.5rem;
+}
+
+.product-card .card-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.product-card .card-text {
+    color: var(--dark-gray);
+}
+
+.product-card .badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+}
+
+/* ========================================
+   7. Hero Section
+   ======================================== */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 80px 0;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+}
+
+.hero-section h1 {
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero-section .lead {
+    font-size: 1.25rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* ========================================
+   8. Category Cards
+   ======================================== */
+.category-card {
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    border-radius: 10px;
+    padding: 2rem;
+    background: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.category-card i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    transition: transform var(--transition-speed) ease;
+}
+
+.category-card:hover i {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.category-card h4 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+/* ========================================
+   9. Footer
+   ======================================== */
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 40px 0 20px;
+    margin-top: 60px;
+}
+
+.footer h5 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.footer hr {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+   10. Shopping Cart Badge
+   ======================================== */
+.cart-badge {
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    position: relative;
+    top: -2px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* ========================================
+   11. Forms
+   ======================================== */
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.form-check-input:checked {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* ========================================
+   12. Alerts
+   ======================================== */
+.alert {
+    border: none;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* ========================================
+   13. Breadcrumb
+   ======================================== */
+.breadcrumb {
+    background-color: transparent;
+    padding: 1rem 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: var(--dark-gray);
+}
+
+.breadcrumb-item a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--primary-color);
+}
+
+/* ========================================
+   14. Tables
+   ======================================== */
+.table {
+    box-shadow: var(--shadow-sm);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--light-gray);
+}
+
+/* ========================================
+   15. Badges
+   ======================================== */
+.badge {
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+}
+
+.badge.bg-success {
+    background-color: var(--success-color) !important;
+}
+
+.badge.bg-danger {
+    background-color: var(--accent-color) !important;
+}
+
+.badge.bg-warning {
+    background-color: var(--warning-color) !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--secondary-color) !important;
+}
+
+/* ========================================
+   16. Price Display
+   ======================================== */
+.price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--success-color);
+}
+
+.price-old {
+    text-decoration: line-through;
+    color: var(--dark-gray);
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   17. Rating Stars
+   ======================================== */
+.rating {
+    color: var(--warning-color);
+}
+
+.rating i {
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   18. Loading Spinner
+   ======================================== */
+.spinner-border {
+    color: var(--secondary-color);
+}
+
+/* ========================================
+   19. Search Box
+   ======================================== */
+.navbar .form-control {
+    border-radius: 20px;
+    border: none;
+    padding: 0.5rem 1rem;
+}
+
+.navbar .btn-outline-light {
+    border-radius: 20px;
+}
+
+/* ========================================
+   20. Dropdown Menu
+   ======================================== */
+.dropdown-menu {
+    border: none;
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1.5rem;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+}
+
+/* ========================================
+   21. Pagination
+   ======================================== */
+.pagination .page-link {
+    color: var(--secondary-color);
+    border: none;
+    margin: 0 0.2rem;
+    border-radius: 5px;
+}
+
+.pagination .page-link:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* ========================================
+   22. Modal
+   ======================================== */
+.modal-content {
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.modal-footer {
+    border-top: 2px solid var(--light-gray);
+}
+
+/* ========================================
+   23. Image Placeholder
+   ======================================== */
+.img-placeholder {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+}
+
+/* ========================================
+   24. Responsive Utilities
+   ======================================== */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+    
+    .hero-section {
+        padding: 40px 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .product-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+}
+
+/* ========================================
+   25. Smooth Animations
+   ======================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* ========================================
+   26. Custom Scrollbar
+   ======================================== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* ========================================
+   27. Print Styles
+   ======================================== */
+@media print {
+    .navbar,
+    .footer,
+    .btn {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   28. Smart Search & Filters
+   ======================================== */
+#search-suggestions {
+    max-height: 320px;
+    overflow-y: auto;
+    border-radius: 0.75rem;
+    top: calc(100% + 4px);
+    left: 0;
+    z-index: 1030;
+}
+
+#search-suggestions button.list-group-item {
+    border: none;
+}
+
+#search-suggestions button.list-group-item.active,
+#search-suggestions button.list-group-item:focus {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.filter-form .form-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.filter-form input,
+.filter-form select {
+    border-radius: 0.5rem;
+}

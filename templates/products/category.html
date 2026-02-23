@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - ShirtVerse{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'products:list' %}">Shop</a></li>
+            <li class="breadcrumb-item active">{{ category.name }}</li>
+        </ol>
+    </nav>
+    
+    <div class="mb-4">
+        <h2>{{ category.name }}</h2>
+        {% if category.description %}
+            <p class="text-muted">{{ category.description }}</p>
+        {% endif %}
+    </div>
+    
+    <div class="row g-4">
+        {% for product in products %}
+        <div class="col-md-3">
+            <div class="card product-card h-100">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+                {% else %}
+                    <div class="card-img-top product-image bg-secondary d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
+                    </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">
+                        <strong class="text-primary">₹{{ product.price }}</strong>
+                    </p>
+                    {% if product.is_in_stock %}
+                        <span class="badge bg-success">In Stock</span>
+                    {% else %}
+                        <span class="badge bg-danger">Out of Stock</span>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white">
+                    <a href="{% url 'products:detail' product.slug %}" class="btn btn-primary w-100">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                <p class="mb-0">No products available in this category yet.</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- All Categories -->
+    <div class="mt-5">
+        <h4>Browse Other Categories</h4>
+        <div class="row g-3 mt-2">
+            {% for cat in categories %}
+                {% if cat.id != category.id %}
+                <div class="col-md-3">
+                    <a href="{% url 'products:category' cat.slug %}" class="text-decoration-none">
+                        <div class="card text-center p-3 category-card">
+                            <h6>{{ cat.name }}</h6>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

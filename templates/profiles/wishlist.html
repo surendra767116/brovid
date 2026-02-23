@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Wishlist - ShirtVerse{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4"><i class="bi bi-heart-fill text-danger"></i> My Wishlist</h2>
+    
+    {% if wishlist.products.exists %}
+    <div class="row g-4">
+        {% for product in wishlist.products.all %}
+        <div class="col-md-3">
+            <div class="card product-card h-100">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+                {% else %}
+                    <div class="card-img-top product-image bg-secondary d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
+                    </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text text-muted">{{ product.category.name }}</p>
+                    <p class="card-text">
+                        <strong class="text-primary">₹{{ product.price }}</strong>
+                    </p>
+                    {% if product.is_in_stock %}
+                        <span class="badge bg-success">In Stock</span>
+                    {% else %}
+                        <span class="badge bg-danger">Out of Stock</span>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white">
+                    <a href="{% url 'products:detail' product.slug %}" class="btn btn-primary w-100 mb-2">
+                        View Details
+                    </a>
+                    <a href="{% url 'profiles:remove_from_wishlist' product.id %}" class="btn btn-outline-danger w-100">
+                        <i class="bi bi-heart-fill"></i> Remove
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card text-center">
+                <div class="card-body p-5">
+                    <i class="bi bi-heart display-1 text-muted mb-3"></i>
+                    <h3>Your Wishlist is Empty</h3>
+                    <p class="text-muted">Save items you love to your wishlist.</p>
+                    <a href="{% url 'products:list' %}" class="btn btn-primary mt-3">
+                        Browse Products
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
