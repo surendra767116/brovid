@@ -41,47 +41,6 @@
     </div>
 </div>
 
-<!-- Featured Products -->
-<div class="container mb-5">
-    <h2 class="text-center mb-4">Featured Shirts</h2>
-    <div class="row g-4">
-        {% for product in featured_products %}
-        <div class="col-md-3">
-            <div class="card product-card h-100">
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
-                {% else %}
-                    <div class="card-img-top product-image bg-secondary d-flex align-items-center justify-content-center">
-                        <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
-                    </div>
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text text-muted">{{ product.category.name }}</p>
-                    <p class="card-text">
-                        <strong class="text-primary">₹{{ product.price }}</strong>
-                    </p>
-                    {% if product.is_in_stock %}
-                        <span class="badge bg-success">In Stock</span>
-                    {% else %}
-                        <span class="badge bg-danger">Out of Stock</span>
-                    {% endif %}
-                </div>
-                <div class="card-footer bg-white">
-                    <a href="{% url 'products:detail' product.slug %}" class="btn btn-primary w-100">
-                        View Details
-                    </a>
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <div class="col-12">
-            <p class="text-center text-muted">No products available yet.</p>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
 <!-- Features Section -->
 <div class="container mb-5">
     <div class="row g-4">

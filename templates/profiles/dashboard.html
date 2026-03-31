@@ -26,9 +26,12 @@
                         <a href="{% url 'profiles:settings' %}" class="list-group-item list-group-item-action">
                             <i class="bi bi-gear"></i> Settings
                         </a>
-                        <a href="{% url 'accounts:logout' %}" class="list-group-item list-group-item-action text-danger">
-                            <i class="bi bi-box-arrow-right"></i> Logout
-                        </a>
+                        <form method="post" action="{% url 'accounts:logout' %}" class="m-0">
+                            {% csrf_token %}
+                            <button type="submit" class="list-group-item list-group-item-action text-danger w-100 text-start border-0 bg-transparent">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
