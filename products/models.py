@@ -88,7 +88,7 @@ class Product(models.Model):
 	brand = models.CharField(max_length=100, blank=True)
 	image = models.ImageField(upload_to="products/main/", blank=True, null=True)
 	is_featured = models.BooleanField(default=False)
-	is_active = models.BooleanField(default=True)
+	is_active = models.BooleanField(default=True, help_text="Uncheck to hide from shop")
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	available_sizes = models.ManyToManyField(SizeOption, blank=True, related_name="products")
